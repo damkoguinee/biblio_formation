@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <form method="GET">
+        <div class="form-group">
+            <label for="nbre1">Entrer le 1er nombre</label>
+            <input type="text" name="nbre1" value="{{nbre1}}" required onchange="this.form.submit()" id="nbre1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="nbre2">Entrer le 2ème nombre</label>
+            <input type="text" name="nbre2" value="{{nbre2}}" required id="nbre2" onchange="this.form.submit()" class="form-control">
+        </div>
+        <div class="d-flex justify-content-between mt-5">
+            <button type="submit" class="btn btn-primary">Affichez le resultat</button>
+            <button type="reset" class="btn btn-warning">Effacer</button>
+        </div>
+    </form>
+    {% if nbre1=="" or nbre2=="" %}
+        <div class="alert alert-warning">Entrer des valeurs valides</div>
+        {% else %}
+            
+            <p>Pour ces deux nombres les resultats sont:</p>
+            <ul>
+                <li>{{nbre1}} + {{nbre2}} = {{nbre1+nbre2}}</li>
+                <li>{{nbre1}} - {{nbre2}} = {{nbre1-nbre2}}</li>
+                <li>{{nbre1}} x {{nbre2}} = {{nbre1*nbre2}}</li>
+                {% if nbre2==0 %}
+                    <li>Divison par 0 impossible</li>
+                {% else %}
+                    <li>{{nbre1}} / {{nbre2}} = {{nbre1/nbre2}}</li>
+                {% endif %}  
+            </ul>
+    {% endif %}
+    
+
+{% endblock %}

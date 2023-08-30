@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block title %}Fiche-livre{% endblock %}
+{% block titreH1 %}Fiche Livre{% endblock %}
+
+{% block body %}
+    <div class="card mb-3 mx-2 p-2 bg-light m-auto" style="width: 340px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="couverture">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ livre.titre }}</h5>
+
+                    <p class="card-text">
+                        <a href="{{ path('app_home_auteur', {id: livre.auteur.id}) }}" >{{ livre.auteur.identite }}</a>
+                    </p>                    
+                    <p class="card-text">
+                        {% for genre in livre.genres %}                    
+                            {{ genre.libelle}}
+                        {% endfor %}
+                    </p>  
+                    <p class="card-text">
+                        <small class="text-body-secondary">
+                        {{livre.resume}}
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-body-secondary">
+                        Popularité: emprunté {{nbreEmprunt}} fois
+                        </small>
+                    </p>
+
+                    <p class="card-text">
+                        <small class="text-body-secondary">
+                        Disponible:  {{livre.disponible ? "ok" :"nok"}}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{path('app_espace_lecteur_emprunter', {id: livre.id})}}" class="card-link"><i class="fa-solid fa-info" style="color: #511f31;"></i></a>
+                    <a href="{{path('app_espace_lecteur_emprunter', {id: livre.id})}}" class="card-link"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

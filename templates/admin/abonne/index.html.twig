@@ -1,0 +1,61 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Abonne index{% endblock %}
+
+{% block body %}
+    <h2 class="text-center bg-secondary">Liste des Abonnés</h2>
+    <div style="overflow: auto">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="sticky-top bg-light text-center">
+                <tr>
+                    <th>Id</th>
+                    <th>Pseudo</th>
+                    <th>Niveau</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Naissance</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for abonne in abonnes %}
+                <tr>
+                    <td>{{ abonne.id }}</td>
+                    <td>{{ abonne.pseudo }}</td>
+                    <td>
+                        {{abonne|autorisations}}
+                        {# {% for role in abonne.roles %}
+                            
+                            {% if role=="ROLE_USER" %}
+                                Abonné
+                            {% elseif role=="ROLE_LECTEUR" %}                                        
+                                Lecteur
+                            {% elseif role=="ROLE_BIBLIO" %}                                        
+                                Bibliothécaire
+                            {% elseif role=="ROLE_ADMIN" %}                                        
+                                Administrateur 
+                            {% elseif role =="ROLE_DEV" %}
+                                Développeur                                  
+                            {% endif %}
+                            {{ loop.last ? "": ","}}                             
+                        {% endfor %} #}
+                    </td>
+                    <td>{{ abonne.prenom }}</td>
+                    <td>{{ abonne.nom }}</td>
+                    <td>{{ abonne.naissance ? abonne.naissance|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_abonne_show', {'id': abonne.id}) }}"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('app_admin_abonne_edit', {'id': abonne.id}) }}"><i class="fa fa-edit"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ path('app_admin_abonne_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block title %}Fiche-genre {% endblock %}
+{% block titreH1 %}Fiche genre{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-wrap justify-content-between">
+        {% for genre in genres %}
+            <div class="card mb-3 mx-2 p-2 bg-light m-auto" style="height: 200px; width:250px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="" class="img-fluid rounded-start" alt="couverture">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ genre.libelle }}</h5>
+
+                        {# <p class="card-text">
+                            <a href="{{ path('app_home_auteur', {id: genre.auteur.id}) }}" >{{ genre.auteur.identite }}</a>
+                        </p>                    
+                        <p class="card-text">
+                            {% for genre in genre.genres %}                    
+                                {{ genre.libelle}}
+                            {% endfor %}
+                        </p>  
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                            {{genre.resume}}
+                            </small>
+                        </p> #}
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="{{path('app_home_fiche_genre', {id: genre.id})}}" class="card-link"><i class="fa-solid fa-info" style="color: #511f31;"></i></a>
+
+                        <a href="#" class="card-link">{{genre.livres|length()}}</a>
+                    </div>
+                </div>
+            </div>
+            </div>        
+        {% endfor %}
+    </div>
+
+{% endblock %}

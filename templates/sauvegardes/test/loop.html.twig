@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<table class="table">
+    {% for i in 1..int %}
+    <tr>
+        <td>{{i}}</td>
+    </tr>
+        
+    {% endfor %}
+</table>
+
+{% endblock %}
